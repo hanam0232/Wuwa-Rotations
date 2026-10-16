@@ -1,0 +1,160 @@
+.app-header {
+    height: 52px;
+    background-color: #12161f;
+    border-bottom: 1px solid #232936;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    user-select: none;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 1. Cụm bên trái */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo .gamepad-icon {
+    width: 1.85em;
+    height: 1.85em;
+    stroke: #00d2ff;
+    filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.45));
+}
+
+.brand-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f0f6fc;
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+}
+
+/* 2. Cụm chính giữa Header */
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.current-preset-badge {
+    pointer-events: auto;
+    padding: 4px 14px;
+    background-color: #1a2230;
+    border: 1px solid #28374d;
+    color: #38bdf8;
+    font-size: 13px;
+    border-radius: 14px;
+    font-weight: 600;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* 3. Cụm bên phải */
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex: 1;
+}
+
+/* Định dạng các nút bấm */
+.btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid transparent;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s,
+        color 0.15s,
+        filter 0.15s;
+    white-space: nowrap;
+}
+
+/* Nút Profile */
+.btn-profile {
+    background-color: #161b22;
+    border-color: #30363d;
+    color: #c9d1d9;
+    margin-left: 1cm;
+}
+
+.btn-profile:hover {
+    background-color: #21262d;
+    border-color: #58a6ff;
+    color: #f0f6fc;
+}
+
+/* Nút Import JSON */
+.btn-import-json {
+    background-color: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+}
+
+.btn-import-json:hover {
+    background-color: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+}
+
+/* Nút Export JSON */
+.btn-export-json {
+    background-color: rgba(234, 179, 8, 0.1);
+    border-color: rgba(234, 179, 8, 0.3);
+    color: #facc15;
+}
+
+.btn-export-json:hover {
+    background-color: rgba(234, 179, 8, 0.2);
+    border-color: #facc15;
+}
+
+/* Nút Export PNG */
+.btn-export-png {
+    background-color: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    color: #c084fc;
+}
+
+.btn-export-png:hover {
+    background-color: rgba(168, 85, 247, 0.2);
+    border-color: #c084fc;
+}
+
+.btn-save {
+    background-color: #238636;
+    border-color: #2ea043;
+    color: #ffffff;
+    padding: 0 13px 0 10px !important;
+}
+
+.btn-save:hover {
+    background-color: #2ea043;
+    filter: brightness(1.05);
+}

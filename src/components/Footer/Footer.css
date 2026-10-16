@@ -1,0 +1,175 @@
+.app-footer {
+    height: 44px;
+    background-color: #0d1117;
+    border-top: 1px solid #1e2532;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    user-select: none;
+    z-index: 50;
+    flex-shrink: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Khung cuộn: Ẩn hoàn toàn scrollbar gốc của trình duyệt để không bao giờ bị xô lệch layout */
+.preset-tabs-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Ẩn trên Firefox */
+}
+
+.preset-tabs-list::-webkit-scrollbar {
+    display: none; /* Ẩn trên Chrome, Edge, Safari */
+}
+
+/* Thanh cuộn nổi độc lập đè lên sát đáy Footer (~2.5mm = 9px) */
+.custom-floating-scrollbar {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    height: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 60;
+}
+
+.custom-floating-scrollbar.visible {
+    opacity: 1;
+}
+
+.custom-floating-thumb {
+    height: 100%;
+    background-color: #0e4c63;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Cố định kích thước tab */
+.preset-tab-btn {
+    height: 28px;
+    padding: 0 8px 0 12px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 2px;
+    color: #8b949e;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    gap: 8px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    transition:
+        border-color 0.15s,
+        color 0.15s,
+        background-color 0.15s,
+        opacity 0.2s,
+        transform 0.15s;
+}
+
+.preset-tab-btn:hover {
+    border-color: #58a6ff;
+    color: #e6edf3;
+}
+
+.preset-tab-btn.active {
+    border-color: #0284c7;
+    color: #38bdf8;
+    background-color: #0b1e2e;
+}
+
+.preset-tab-btn.is-dragging {
+    opacity: 0.4;
+    transform: scale(0.96);
+    cursor: grabbing;
+}
+
+.preset-tab-title {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.preset-tab-close {
+    background: transparent;
+    border: none;
+    color: #6e7681;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preset-tab-close:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.15);
+}
+
+.preset-tab-btn.active .preset-tab-close {
+    color: #38bdf8;
+}
+
+.preset-tab-btn.active .preset-tab-close:hover {
+    color: #ffffff;
+    background-color: #ef4444;
+}
+
+.preset-tab-btn.add-tab-btn {
+    width: 28px;
+    padding: 0;
+    font-size: 16px;
+    color: #8b949e;
+}
+
+.preset-tab-btn.add-tab-btn:hover {
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+/* Context Menu chuột phải */
+.tab-context-menu {
+    position: fixed;
+    background-color: #1c212b;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 4px 0;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    min-width: 180px;
+}
+
+.tab-context-menu-item {
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #c9d1d9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+        background-color 0.12s,
+        color 0.12s;
+}
+
+.tab-context-menu-item:hover {
+    background-color: #0b1e2e;
+    color: #38bdf8;
+}

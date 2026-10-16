@@ -1,0 +1,245 @@
+/* Thanh cuộn đồng màu xanh đen */
+.timeline-sheet-wrapper {
+    flex: 1;
+    background-color: #0b0e14;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 0;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #0e4c63 #0a111a;
+}
+
+.timeline-sheet-wrapper::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+.timeline-sheet-wrapper::-webkit-scrollbar-track {
+    background: #0a111a;
+}
+
+.timeline-sheet-wrapper::-webkit-scrollbar-thumb {
+    background: #0e4c63;
+    border-radius: 4px;
+}
+
+.timeline-sheet-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #156d8d;
+}
+
+/* Bảng dạng CSS Grid: cột 3 (character-info) dùng max-content để mọi dòng luôn bằng dòng dài nhất */
+.timeline-table {
+    display: grid;
+    grid-template-columns: 5px 34px max-content 1fr 38px;
+    gap: 0;
+    width: max-content;
+    min-width: 100%;
+    border-top: 1px solid #232936;
+}
+
+/* Từng dòng dùng subgrid để các ô con khớp trực tiếp vào lưới chung của bảng */
+.timeline-row {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: center;
+    height: 60px;
+    background-color: #12161f;
+    border-bottom: 1px solid #1a202c;
+    position: relative;
+}
+
+/* Fallback cho trình duyệt chưa bật subgrid */
+@supports not (grid-template-columns: subgrid) {
+    .timeline-row {
+        display: contents;
+    }
+}
+
+/* Dải màu attribute cố định sát mép trái */
+.attribute-strip {
+    width: 5px;
+    height: 100%;
+    position: sticky;
+    left: 0;
+    z-index: 12;
+}
+
+.row-col {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Cột STT */
+.col-index {
+    width: 34px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0e1219;
+    color: #6e7681;
+    font-size: 12px;
+    border-right: 1px solid #1a202c;
+    position: sticky;
+    left: 5px; /* Ngay sau dải màu 5px */
+    z-index: 11;
+}
+
+/* Cột thông tin nhân vật */
+.col-character-info {
+    min-width: 120px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-right: 1px solid #1a202c;
+    background-color: #12161f;
+    position: sticky;
+    left: 39px; /* Khớp chuẩn: 5px (dải màu) + 34px (cột STT) = 39px */
+    z-index: 10;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.char-avatar-square.gray-border {
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    border: 1px solid #4a5568;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.char-avatar-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.char-name-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #f0f6fc;
+    white-space: nowrap;
+}
+
+.drop-char-hint {
+    font-size: 11px;
+    color: #484f58;
+}
+
+/* Vùng chứa chiêu thức */
+.col-actions-track {
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 20px;
+    gap: 4px;
+    position: relative;
+    overflow: visible;
+    height: 100%;
+}
+
+.col-actions-track.disabled-track {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.locked-text {
+    font-size: 12px;
+    color: #4b5563;
+    font-style: italic;
+}
+
+.timeline-action-badge {
+    padding: 0 12px;
+    min-width: 44px;
+    height: 38px;
+    line-height: 1;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    user-select: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    transition:
+        transform 0.22s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.timeline-action-badge:active {
+    cursor: grabbing;
+}
+
+.timeline-action-badge.is-dragging-placeholder {
+    background-color: rgba(56, 189, 248, 0.05) !important;
+    border: 1.5px dashed rgba(56, 189, 248, 0.5) !important;
+    border-radius: 2px !important;
+    color: transparent !important;
+    box-shadow: none !important;
+    cursor: grabbing;
+    pointer-events: none;
+}
+
+.timeline-action-badge.is-external-placeholder {
+    animation: placeholder-glide 0.2s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@keyframes placeholder-glide {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Nút xóa hàng [x] cố định sát mép phải */
+.col-delete-row {
+    width: 38px;
+    justify-content: center;
+    border-left: 1px solid #1a202c;
+    background-color: #12161f;
+    position: sticky;
+    right: 0;
+    z-index: 10;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.btn-delete-row {
+    background: transparent;
+    border: none;
+    color: #484f58;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 2px;
+}
+
+.btn-delete-row:hover {
+    color: #ef4444;
+    background-color: #21262d;
+}
+
+.create-row-dropzone {
+    grid-column: 1 / -1;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding-left: 1cm;
+    font-size: 12px;
+    color: #58a6ff;
+    border-bottom: 1px dashed #283142;
+    background-color: #0e1219;
+    width: 100%;
+}

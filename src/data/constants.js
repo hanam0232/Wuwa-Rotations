@@ -1,0 +1,123 @@
+const attrImgs = import.meta.glob("../assets/attributes/*.{webp,png,jpg,svg}", {
+    eager: true,
+    import: "default",
+});
+const charImgs = import.meta.glob("../assets/characters/*.{webp,png,jpg,svg}", {
+    eager: true,
+    import: "default",
+});
+
+const attr = (name) => attrImgs[`../assets/attributes/${name}.png`];
+const char = (name) => charImgs[`../assets/characters/${name}.webp`];
+
+export const ATTRIBUTE_COLORS = {
+    Glacio: "#41AEFB",
+    Fusion: "#F0744E",
+    Electro: "#B46BFF",
+    Aero: "#55FFB5",
+    Spectro: "#EECC22",
+    Havoc: "#E549A5",
+};
+
+// prettier-ignore
+export const ATTRIBUTES = [
+    { id: "Glacio", icon: attr("glacio") },
+    { id: "Fusion", icon: attr("fusion") },
+    { id: "Electro", icon: attr("electro") },
+    { id: "Aero", icon: attr("aero") },
+    { id: "Spectro", icon: attr("spectro") },
+    { id: "Havoc", icon: attr("havoc") },
+];
+
+// prettier-ignore
+export const CHARACTERS_DATABASE = [
+    { id: "baizhi", name: "Baizhi", rarity: 4, attribute: "Glacio", avatar: char("baizhi") },
+    { id: "carlotta", name: "Carlotta", rarity: 5, attribute: "Glacio", avatar: char("carlotta") },
+    { id: "hiyuki", name: "Hiyuki", rarity: 5, attribute: "Glacio", avatar: char("hiyuki") },
+    { id: "lingyang", name: "Lingyang", rarity: 5, attribute: "Glacio", avatar: char("lingyang") },
+    { id: "lucilla", name: "Lucilla", rarity: 5, attribute: "Glacio", avatar: char("lucilla") },
+    { id: "sanhua", name: "Sanhua", rarity: 4, attribute: "Glacio", avatar: char("sanhua") },
+    { id: "suisui", name: "Suisui", rarity: 5, attribute: "Glacio", avatar: char("suisui") },
+    { id: "youhu", name: "Youhu", rarity: 4, attribute: "Glacio", avatar: char("youhu") },
+    { id: "zhezhi", name: "Zhezhi", rarity: 5, attribute: "Glacio", avatar: char("zhezhi") },
+    { id: "aemeath", name: "Aemeath", rarity: 5, attribute: "Fusion", avatar: char("aemeath") },
+    { id: "brant", name: "Brant", rarity: 5, attribute: "Fusion", avatar: char("brant") },
+    { id: "changli", name: "Changli", rarity: 5, attribute: "Fusion", avatar: char("changli") },
+    { id: "chixia", name: "Chixia", rarity: 4, attribute: "Fusion", avatar: char("chixia") },
+    { id: "denia", name: "Denia", rarity: 5, attribute: "Fusion", avatar: char("denia") },
+    { id: "encore", name: "Encore", rarity: 5, attribute: "Fusion", avatar: char("encore") },
+    { id: "galbrena", name: "Galbrena", rarity: 5, attribute: "Fusion", avatar: char("galbrena") },
+    { id: "jingran", name: "Jingran", rarity: 5, attribute: "Fusion", avatar: char("jingran") },
+    { id: "lupa", name: "Lupa", rarity: 5, attribute: "Fusion", avatar: char("lupa") },
+    { id: "mornye", name: "Mornye", rarity: 5, attribute: "Fusion", avatar: char("mornye") },
+    { id: "mortefi", name: "Mortefi", rarity: 4, attribute: "Fusion", avatar: char("mortefi") },
+    { id: "augusta", name: "Augusta", rarity: 5, attribute: "Electro", avatar: char("augusta") },
+    { id: "buling", name: "Buling", rarity: 4, attribute: "Electro", avatar: char("buling") },
+    { id: "calcharo", name: "Calcharo", rarity: 5, attribute: "Electro", avatar: char("calcharo") },
+    { id: "hsin", name: "Hsin", rarity: 5, attribute: "Electro", avatar: char("hsin") },
+    { id: "lumi", name: "Lumi", rarity: 4, attribute: "Electro", avatar: char("lumi") },
+    { id: "rebecca", name: "Rebecca", rarity: 5, attribute: "Electro", avatar: char("rebecca") },
+    { id: "rover_electro", name: "Rover: Electro", rarity: 5, attribute: "Electro", avatar: char("rover-electro") },
+    { id: "suoming", name: "Suoming", rarity: 5, attribute: "Electro", avatar: char("suoming") },
+    { id: "xiangli_yao", name: "Xiangli Yao", rarity: 5, attribute: "Electro", avatar: char("xiangli-yao") },
+    { id: "yinlin", name: "Yinlin", rarity: 5, attribute: "Electro", avatar: char("yinlin") },
+    { id: "yuanwu", name: "Yuanwu", rarity: 4, attribute: "Electro", avatar: char("yuanwu") },
+    { id: "aalto", name: "Aalto", rarity: 4, attribute: "Aero", avatar: char("aalto") },
+    { id: "cartethyia", name: "Cartethyia", rarity: 5, attribute: "Aero", avatar: char("cartethyia") },
+    { id: "ciaccona", name: "Ciaccona", rarity: 5, attribute: "Aero", avatar: char("ciaccona") },
+    { id: "jianxin", name: "Jianxin", rarity: 5, attribute: "Aero", avatar: char("jianxin") },
+    { id: "jiyan", name: "Jiyan", rarity: 5, attribute: "Aero", avatar: char("jiyan") },
+    { id: "iuno", name: "Iuno", rarity: 5, attribute: "Aero", avatar: char("iuno") },
+    { id: "qingxiao", name: "Qingxiao", rarity: 5, attribute: "Aero", avatar: char("qingxiao") },
+    { id: "qiuyuan", name: "Qiuyuan", rarity: 5, attribute: "Aero", avatar: char("qiuyuan") },
+    { id: "rover_aero", name: "Rover: Aero", rarity: 5, attribute: "Aero", avatar: char("rover-aero") },
+    { id: "sigrika", name: "Sigrika", rarity: 5, attribute: "Aero", avatar: char("sigrika") },
+    { id: "yangyang", name: "Yangyang", rarity: 4, attribute: "Aero", avatar: char("yangyang") },
+    { id: "jinhsi", name: "Jinhsi", rarity: 5, attribute: "Spectro", avatar: char("jinhsi") },
+    { id: "lucy", name: "Lucy", rarity: 5, attribute: "Spectro", avatar: char("lucy") },
+    { id: "luuk_herssen", name: "Luuk Herssen", rarity: 5, attribute: "Spectro", avatar: char("luuk-herssen") },
+    { id: "lynae", name: "Lynae", rarity: 5, attribute: "Spectro", avatar: char("lynae") },
+    { id: "phoebe", name: "Phoebe", rarity: 5, attribute: "Spectro", avatar: char("phoebe") },
+    { id: "rover_spectro", name: "Rover: Spectro", rarity: 5, attribute: "Spectro", avatar: char("rover-spectro") },
+    { id: "shorekeeper", name: "Shorekeeper", rarity: 5, attribute: "Spectro", avatar: char("shorekeeper") },
+    { id: "verina", name: "Verina", rarity: 5, attribute: "Spectro", avatar: char("verina") },
+    { id: "zani", name: "Zani", rarity: 5, attribute: "Spectro", avatar: char("zani") },
+    { id: "camellya", name: "Camellya", rarity: 5, attribute: "Havoc", avatar: char("camellya") },
+    { id: "cantarella", name: "Cantarella", rarity: 5, attribute: "Havoc", avatar: char("cantarella") },
+    { id: "chisa", name: "Chisa", rarity: 5, attribute: "Havoc", avatar: char("chisa") },
+    { id: "danjin", name: "Danjin", rarity: 4, attribute: "Havoc", avatar: char("danjin") },
+    { id: "phrolova", name: "Phrolova", rarity: 5, attribute: "Havoc", avatar: char("phrolova") },
+    { id: "roccia", name: "Roccia", rarity: 5, attribute: "Havoc", avatar: char("roccia") },
+    { id: "rover_havoc", name: "Rover: Havoc", rarity: 5, attribute: "Havoc", avatar: char("rover-havoc") },
+    { id: "taoqi", name: "Taoqi", rarity: 4, attribute: "Havoc", avatar: char("taoqi") },
+    { id: "yangyang_xuanling", name: "Yangyang: Xuanling", rarity: 5, attribute: "Havoc", avatar: char("yangyang-xuanling") },
+    
+];
+
+// prettier-ignore
+export const BASIC_MOVES = [
+    { id: "E", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "R", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "R1", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "R2", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "BA", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "[E]", bgColor: "#701a75", textColor: "#ffffff" },
+    { id: "[R]", bgColor: "#701a75", textColor: "#ffffff" },
+    { id: "[BA]", bgColor: "#701a75", textColor: "#ffffff" },
+    { id: "E", bgColor: "#be185d", textColor: "#ffffff" },
+    { id: "R", bgColor: "#be185d", textColor: "#ffffff" },
+    { id: "R1", bgColor: "#be185d", textColor: "#ffffff" },
+    { id: "R2", bgColor: "#be185d", textColor: "#ffffff" },
+    { id: "BA", bgColor: "#be185d", textColor: "#ffffff" },
+    { id: "MA", bgColor: "#328306", textColor: "#ffffff" },
+    { id: "[MA]", bgColor: "#328306", textColor: "#ffffff" },
+    { id: "⸤____⸥", bgColor: "#328306", textColor: "#ffffff" },
+    { id: "Q", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "F", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "Echo", bgColor: "#a855f7", textColor: "#ffffff" },
+    { id: "HA", bgColor: "#dc2626", textColor: "#ffffff" },
+    { id: "Intro", bgColor: "#f59e0b", textColor: "#ffffff" },
+    { id: "Outro", bgColor: "#3b82f6", textColor: "#ffffff" },
+    { id: "Dash", bgColor: "#64748b", textColor: "#ffffff" },
+    { id: "Plunge", bgColor: "#221fdf", textColor: "#ffffff" },
+];

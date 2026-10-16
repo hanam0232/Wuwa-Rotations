@@ -1,0 +1,135 @@
+.preview-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.preview-modal-container {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    width: 90vw;
+    max-width: 950px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.preview-modal-header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid #21262d;
+    background-color: #0d1117;
+}
+
+.preview-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f6fc;
+}
+
+.preview-modal-close {
+    background: transparent;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.preview-modal-close:hover {
+    color: #f0f6fc;
+    background-color: #21262d;
+}
+
+.preview-modal-body {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+    background-color: #06090e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-image-scroll-wrapper {
+    max-width: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.preview-image {
+    max-height: 55vh;
+    max-width: 100%;
+    object-fit: contain;
+    border: 1px solid #21262d;
+    border-radius: 4px;
+}
+
+.preview-empty {
+    color: #8b949e;
+    font-size: 14px;
+}
+
+.preview-modal-footer {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 16px;
+    border-top: 1px solid #21262d;
+    background-color: #0d1117;
+}
+
+.btn-preview-cancel {
+    height: 32px;
+    padding: 0 14px;
+    background-color: transparent;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    color: #c9d1d9;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-preview-cancel:hover {
+    background-color: #21262d;
+}
+
+.btn-preview-export {
+    height: 32px;
+    padding: 0 16px;
+    background-color: #238636;
+    border: 1px solid #2ea043;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-preview-export:hover:not(:disabled) {
+    background-color: #2ea043;
+}
+
+.btn-preview-export:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
