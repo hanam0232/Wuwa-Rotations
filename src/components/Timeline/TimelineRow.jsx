@@ -368,7 +368,7 @@ export default function TimelineRow({
                                 }}
                             >
                                 <Copy size={14} />
-                                <span>Nhân bản dòng</span>
+                                <span>Nhân bản</span>
                             </button>
 
                             <button
