@@ -43,24 +43,44 @@ export default function Sidebar({
 
     const updatePopoverPosition = () => {
         if (!inputRef.current) return;
-        const rect = inputRef.current.getBoundingClientRect();
-        setPopoverCoords({
-            left: rect.right + 12,
-            bottom: window.innerHeight - rect.bottom,
-        });
+        try {
+            const inputRect = inputRef.current.getBoundingClientRect();
+            const sidebarEl = inputRef.current.closest(".sidebar");
+            const sidebarRight = sidebarEl
+                ? sidebarEl.getBoundingClientRect().right
+                : 280;
+
+            setPopoverCoords({
+                left: sidebarRight + 12,
+                bottom: Math.max(16, window.innerHeight - inputRect.bottom),
+            });
+        } catch (err) {
+            console.error("Lỗi cập nhật vị trí bảng màu:", err);
+        }
     };
 
     useEffect(() => {
         if (isAdding) {
-            if (inputRef.current) inputRef.current.focus();
-            updatePopoverPosition();
+            const frameId = requestAnimationFrame(() => {
+                if (inputRef.current) {
+                    inputRef.current.focus();
+                }
+                updatePopoverPosition();
+            });
+
             window.addEventListener("scroll", updatePopoverPosition, true);
             window.addEventListener("resize", updatePopoverPosition);
+
+            return () => {
+                cancelAnimationFrame(frameId);
+                window.removeEventListener(
+                    "scroll",
+                    updatePopoverPosition,
+                    true,
+                );
+                window.removeEventListener("resize", updatePopoverPosition);
+            };
         }
-        return () => {
-            window.removeEventListener("scroll", updatePopoverPosition, true);
-            window.removeEventListener("resize", updatePopoverPosition);
-        };
     }, [isAdding]);
 
     useEffect(() => {
@@ -141,14 +161,12 @@ export default function Sidebar({
         }
     };
 
-    // Xóa theo index để không bị xóa trùng các chiêu cùng tên (như "E", "BA")
     const handleDeleteMoveByIndex = (indexToDelete) => {
         const nextMoves = moves.filter((_, idx) => idx !== indexToDelete);
         setMoves(nextMoves);
         saveStoredMoves(nextMoves);
     };
 
-    // Reset về danh sách ban đầu trong constants.js
     const handleResetMoves = () => {
         onRequestConfirmation(
             "Đặt lại danh sách chiêu",
@@ -262,52 +280,56 @@ export default function Sidebar({
                                 placeholder="..."
                             />
 
-                            {createPortal(
-                                <div
-                                    className="palette-portal-popup"
-                                    ref={popoverRef}
-                                    style={{
-                                        left: `${popoverCoords.left}px`,
-                                        bottom: `${popoverCoords.bottom}px`,
-                                    }}
-                                >
-                                    <div className="preset-dots-row">
-                                        {PRESET_COLORS.map((c) => (
-                                            <button
-                                                key={c}
-                                                type="button"
-                                                className={`palette-dot ${selectedColor.toLowerCase() === c.toLowerCase() ? "active" : ""}`}
-                                                style={{ backgroundColor: c }}
-                                                onClick={() =>
-                                                    setSelectedColor(c)
-                                                }
-                                            />
-                                        ))}
-                                    </div>
-
-                                    <div className="palette-divider" />
-
-                                    <div className="custom-color-picker-box">
-                                        <div className="picker-header">
-                                            <span
-                                                className="color-preview-circle"
-                                                style={{
-                                                    backgroundColor:
-                                                        selectedColor,
-                                                }}
-                                            />
-                                            <span className="color-hex-text">
-                                                {selectedColor}
-                                            </span>
+                            {typeof document !== "undefined" &&
+                                document.body &&
+                                createPortal(
+                                    <div
+                                        className="palette-portal-popup"
+                                        ref={popoverRef}
+                                        style={{
+                                            left: `${popoverCoords.left || 292}px`,
+                                            bottom: `${popoverCoords.bottom || 16}px`,
+                                        }}
+                                    >
+                                        <div className="preset-dots-row">
+                                            {PRESET_COLORS.map((c) => (
+                                                <button
+                                                    key={c}
+                                                    type="button"
+                                                    className={`palette-dot ${selectedColor.toLowerCase() === c.toLowerCase() ? "active" : ""}`}
+                                                    style={{
+                                                        backgroundColor: c,
+                                                    }}
+                                                    onClick={() =>
+                                                        setSelectedColor(c)
+                                                    }
+                                                />
+                                            ))}
                                         </div>
-                                        <HexColorPicker
-                                            color={selectedColor}
-                                            onChange={setSelectedColor}
-                                        />
-                                    </div>
-                                </div>,
-                                document.body,
-                            )}
+
+                                        <div className="palette-divider" />
+
+                                        <div className="custom-color-picker-box">
+                                            <div className="picker-header">
+                                                <span
+                                                    className="color-preview-circle"
+                                                    style={{
+                                                        backgroundColor:
+                                                            selectedColor,
+                                                    }}
+                                                />
+                                                <span className="color-hex-text">
+                                                    {selectedColor}
+                                                </span>
+                                            </div>
+                                            <HexColorPicker
+                                                color={selectedColor}
+                                                onChange={setSelectedColor}
+                                            />
+                                        </div>
+                                    </div>,
+                                    document.body,
+                                )}
                         </div>
                     ) : (
                         <div

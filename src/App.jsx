@@ -38,7 +38,6 @@ export default function App() {
     const [dialog, setDialog] = useState(null);
     const [toastMessage, setToastMessage] = useState("");
 
-    // State cho Preview Modal Export PNG
     const [previewImageModal, setPreviewImageModal] = useState({
         isOpen: false,
         imageUrl: "",
@@ -52,11 +51,9 @@ export default function App() {
 
     useEffect(() => {
         if (!toastMessage) return undefined;
-
         const timeoutId = window.setTimeout(() => {
             setToastMessage("");
         }, 1600);
-
         return () => window.clearTimeout(timeoutId);
     }, [toastMessage]);
 
@@ -211,7 +208,6 @@ export default function App() {
         );
     };
 
-    // Mở modal xem trước ảnh
     const handleOpenExportImagePreview = async () => {
         if (!activeTab) return;
         const url = await generateTimelineImage("timeline-export-capture");
@@ -226,7 +222,6 @@ export default function App() {
         });
     };
 
-    // Xác nhận tải ảnh từ modal
     const handleConfirmDownloadImage = () => {
         downloadImage(previewImageModal.imageUrl, previewImageModal.fileName);
         setPreviewImageModal({ isOpen: false, imageUrl: "", fileName: "" });
@@ -369,6 +364,37 @@ export default function App() {
         });
     };
 
+    const handleDuplicateRow = (rowIndex) => {
+        updateActiveTabDirectly((cur) => {
+            const sourceRow = cur.rows[rowIndex];
+            if (!sourceRow) return cur;
+
+            const duplicatedRow = {
+                ...sourceRow,
+                id: `row-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+                actions: sourceRow.actions.map((act) => ({
+                    ...act,
+                    instanceId: `act-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+                })),
+            };
+
+            const nextRows = [...cur.rows];
+            nextRows.splice(rowIndex + 1, 0, duplicatedRow);
+            return { ...cur, rows: nextRows };
+        });
+    };
+
+    // Đổi vị trí sau khi animation vật lý chạy xong trên TimelineSheet
+    const handleReorderRow = (sourceIndex, targetIndex) => {
+        if (sourceIndex === targetIndex || targetIndex === null) return;
+        updateActiveTabDirectly((cur) => {
+            const nextRows = [...cur.rows];
+            const [movedRow] = nextRows.splice(sourceIndex, 1);
+            nextRows.splice(targetIndex, 0, movedRow);
+            return { ...cur, rows: nextRows };
+        });
+    };
+
     return (
         <div className="app-root">
             <Header
@@ -401,6 +427,8 @@ export default function App() {
                         onReorderSkillOnRow={handleReorderSkillOnRow}
                         onDropCreateNewRow={handleDropCreateNewRow}
                         onDeleteRow={handleDeleteRow}
+                        onDuplicateRow={handleDuplicateRow}
+                        onReorderRow={handleReorderRow}
                         onDeleteSkill={handleDeletePlacedSkill}
                     />
                 ) : (
